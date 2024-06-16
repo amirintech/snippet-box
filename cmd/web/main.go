@@ -1,20 +1,30 @@
 package main
 
 import (
+	"flag"
 	"fmt"
+	"log/slog"
 	"net/http"
+	"os"
 )
 
-func main() {
-	fileServer := http.FileServer(http.Dir("./ui/static/"))
-	mux := http.NewServeMux()
-	mux.Handle("GET /static/", http.StripPrefix("/static", fileServer))
-	mux.HandleFunc("GET /{$}", heyHandler)
-	mux.HandleFunc("GET /snippet/view/{id}", snippetViewHandler)
-	mux.HandleFunc("GET /snippet/form", snippetFormHandler)
-	mux.HandleFunc("POST /snippet/create", snippetFormHandler)
+type app struct {
+	logger *slog.Logger
+}
 
-	addr := ":5001"
-	fmt.Printf("Listening on http://localhost%s\n", addr)
-	http.ListenAndServe(addr, mux)
+func main() {
+	addr := flag.String("addr", ":5123", "HTTP network address")
+	flag.Parse()
+
+	logger := slog.New(slog.NewTextHandler(os.Stdout, nil))
+	app := &app{
+		logger: logger,
+	}
+
+	logger.Info(fmt.Sprintf("Listening on http://localhost%s", *addr))
+	err := http.ListenAndServe(*addr, app.routes())
+	if err != nil {
+		logger.Error(err.Error())
+		os.Exit(1)
+	}
 }

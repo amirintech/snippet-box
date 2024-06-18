@@ -1,4 +1,4 @@
-{{ define "base" }}
+{{define "base"}}
 <!doctype html>
 <html lang="en">
     <head>
@@ -16,8 +16,8 @@
         <main>{{ template "main" . }}</main>
 
         <footer>
-            Powered by <a target="_blank" href="https://golang.org/">Go</a>
+            Powered by <a href='https://golang.org/'>Go</a> in {{.CurrentYear}}
         </footer>
     </body>
 </html>
-{{ end }}
+{{end}}

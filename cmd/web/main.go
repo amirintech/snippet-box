@@ -5,6 +5,7 @@ import (
 	"flag"
 	"fmt"
 	"github.com/amirintech/snippet-box/internal/models"
+	"html/template"
 	"log/slog"
 	"net/http"
 	"os"
@@ -13,8 +14,9 @@ import (
 )
 
 type app struct {
-	logger       *slog.Logger
-	snippetModel *models.SnippetModel
+	logger        *slog.Logger
+	snippetModel  *models.SnippetModel
+	templateCache map[string]*template.Template
 }
 
 func main() {
@@ -31,9 +33,16 @@ func main() {
 	}
 	defer db.Close()
 
+	templateCache, err := newTemplateCache()
+	if err != nil {
+		logger.Error(err.Error())
+		os.Exit(1)
+	}
+
 	app := &app{
-		logger:       logger,
-		snippetModel: &models.SnippetModel{DB: db},
+		logger:        logger,
+		snippetModel:  &models.SnippetModel{DB: db},
+		templateCache: templateCache,
 	}
 
 	logger.Info(fmt.Sprintf("Listening on http://localhost%s", *addr))

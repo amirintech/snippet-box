@@ -14,23 +14,10 @@ func (a *app) homeHandler(w http.ResponseWriter, r *http.Request) {
 		a.serverError(w, r, err)
 		return
 	}
-	for _, snippet := range snippets {
-		fmt.Fprintf(w, "<h1>Snippet %d</h1>", snippet.ID)
-	}
-	//files := []string{
-	//	"./ui/html/base.tmpl.html",
-	//	"./ui/html/partials/nav.tmpl.html",
-	//	"./ui/html/pages/home.tmpl.html",
-	//}
-	//ts, err := template.ParseFiles(files...)
-	//if err != nil {
-	//	a.serverError(w, r, err)
-	//	return
-	//}
-	//
-	//if err := ts.ExecuteTemplate(w, "base", nil); err != nil {
-	//	a.serverError(w, r, err)
-	//}
+
+	data := a.newTemplateData(r)
+	data.Snippets = snippets
+	a.render(w, r, http.StatusOK, "home.tmpl.html", data)
 }
 
 func (a *app) snippetViewHandler(w http.ResponseWriter, r *http.Request) {
@@ -50,7 +37,9 @@ func (a *app) snippetViewHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fmt.Fprintf(w, "%+v", snippet)
+	data := a.newTemplateData(r)
+	data.Snippet = snippet
+	a.render(w, r, http.StatusOK, "view.tmpl.html", data)
 }
 
 func (a *app) snippetFormHandler(w http.ResponseWriter, r *http.Request) {

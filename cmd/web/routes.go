@@ -2,7 +2,7 @@ package main
 
 import "net/http"
 
-func (a *app) routes() *http.ServeMux {
+func (a *app) routes() http.Handler {
 	fileServer := http.FileServer(http.Dir("./ui/static/"))
 	mux := http.NewServeMux()
 	mux.Handle("GET /static/", http.StripPrefix("/static", fileServer))
@@ -11,5 +11,5 @@ func (a *app) routes() *http.ServeMux {
 	mux.HandleFunc("GET /snippet/form", a.snippetFormHandler)
 	mux.HandleFunc("POST /snippet/create", a.snippetCreateHandler)
 
-	return mux
+	return a.recoverPanic(a.logRequest(commonHeader(mux)))
 }

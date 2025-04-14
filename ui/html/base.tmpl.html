@@ -1,23 +1,38 @@
 {{define "base"}}
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>{{ template "title" . }}</title>
-    </head>
-    <body>
-        <header>
-            <h1>Snippetbox</h1>
-        </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ template "title" . }}</title>
+    <!-- Add Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <!-- Apply basic body styling -->
+  <body class="font-sans antialiased text-gray-900 bg-gray-100">
+    <!-- Container for centered content -->
+    <div class="container mx-auto px-4 py-8">
+      <header class="bg-blue-600 text-white p-4 rounded-t-lg shadow-md">
+        <h1 class="text-3xl font-bold">Snippetbox</h1>
+      </header>
 
-        {{ template "nav" . }}
+      <!-- Include Navigation -->
+      {{ template "nav" . }}
 
-        <main>{{ template "main" . }}</main>
+      <!-- Main content area with padding and background -->
+      <main class="bg-white p-6 rounded-b-lg shadow-md">
+        {{ template "main" . }}
+      </main>
 
-        <footer>
-            Powered by <a href='https://golang.org/'>Go</a> in {{.CurrentYear}}
-        </footer>
-    </body>
+      <!-- Footer styling -->
+      <footer class="text-center text-gray-500 mt-8 text-sm">
+        Powered by
+        <a href="https://golang.org/" class="text-blue-600 hover:underline"
+          >Go</a
+        >
+        in {{.CurrentYear}}
+      </footer>
+    </div>
+  </body>
 </html>
 {{end}}

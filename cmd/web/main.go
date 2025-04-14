@@ -4,11 +4,12 @@ import (
 	"database/sql"
 	"flag"
 	"fmt"
-	"github.com/amirintech/snippet-box/internal/models"
 	"html/template"
 	"log/slog"
 	"net/http"
 	"os"
+
+	"github.com/amirintech/snippet-box/internal/models"
 
 	_ "github.com/go-sql-driver/mysql"
 )

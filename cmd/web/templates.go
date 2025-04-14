@@ -1,10 +1,11 @@
 package main
 
 import (
-	"github.com/amirintech/snippet-box/internal/models"
 	"html/template"
 	"path/filepath"
 	"time"
+
+	"github.com/amirintech/snippet-box/internal/models"
 )
 
 type templateData struct {

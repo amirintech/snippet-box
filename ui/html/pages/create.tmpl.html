@@ -1,23 +1,69 @@
-{{define "title"}}Create a New Snippet{{end}}
-
-{{define "main"}}
-<form action='/snippet/create' method='POST'>
-    <div>
-        <label>Title:</label>
-        <input type='text' name='title'>
+{{define "title"}}Create a New Snippet{{end}} {{define "main"}}
+<form action="/snippet/create" method="POST" class="space-y-6">
+  <div>
+    <label for="title" class="block text-sm font-medium text-gray-700"
+      >Title:</label
+    >
+    <input
+      type="text"
+      id="title"
+      name="title"
+      class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+    />
+  </div>
+  <div>
+    <label for="content" class="block text-sm font-medium text-gray-700"
+      >Content:</label
+    >
+    <textarea
+      id="content"
+      name="content"
+      rows="5"
+      class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+    ></textarea>
+  </div>
+  <div>
+    <label class="block text-sm font-medium text-gray-700 mb-2"
+      >Delete in:</label
+    >
+    <div class="flex items-center space-x-4">
+      <label class="inline-flex items-center">
+        <input
+          type="radio"
+          name="expires"
+          value="365"
+          checked
+          class="form-radio h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500"
+        />
+        <span class="ml-2 text-sm text-gray-700">One Year</span>
+      </label>
+      <label class="inline-flex items-center">
+        <input
+          type="radio"
+          name="expires"
+          value="7"
+          class="form-radio h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500"
+        />
+        <span class="ml-2 text-sm text-gray-700">One Week</span>
+      </label>
+      <label class="inline-flex items-center">
+        <input
+          type="radio"
+          name="expires"
+          value="1"
+          class="form-radio h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500"
+        />
+        <span class="ml-2 text-sm text-gray-700">One Day</span>
+      </label>
     </div>
-    <div>
-        <label>Content:</label>
-        <textarea name='content'></textarea>
-    </div>
-    <div>
-        <label>Delete in:</label>
-        <input type='radio' name='expires' value='365' checked> One Year
-        <input type='radio' name='expires' value='7'> One Week
-        <input type='radio' name='expires' value='1'> One Day
-    </div>
-    <div>
-        <input type='submit' value='Publish snippet'>
-    </div>
+  </div>
+  <div>
+    <!-- Styled submit button -->
+    <input
+      type="submit"
+      value="Publish snippet"
+      class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 cursor-pointer"
+    />
+  </div>
 </form>
 {{end}}

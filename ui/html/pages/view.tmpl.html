@@ -1,17 +1,24 @@
-{{define "title"}}Snippet #{{.Snippet.ID}}{{end}}
-
-{{define "main"}}
-    {{with .Snippet}}
-    <div class='snippet'>
-        <div class='metadata'>
-            <strong>{{.Title}}</strong>
-            <span>#{{.ID}}</span>
-        </div>
-        <pre><code>{{.Content}}</code></pre>
-        <div class='metadata'>
-            <time>Created: {{humanDate .Created}}</time>
-            <time>Expires: {{humanDate .Expires}}</time>
-        </div>
-    </div>
-    {{end}}
-{{end}}
+{{define "title"}}Snippet #{{.Snippet.ID}}{{end}} {{define "main"}} {{with
+.Snippet}}
+<!-- Snippet container styling -->
+<div class="snippet space-y-4">
+  <!-- Metadata section styling -->
+  <div
+    class="metadata flex justify-between items-center border-b border-gray-200 pb-2"
+  >
+    <strong class="text-xl font-semibold text-gray-800">{{.Title}}</strong>
+    <span class="text-sm font-mono text-gray-500">#{{.ID}}</span>
+  </div>
+  <!-- Code block styling -->
+  <pre
+    class="bg-gray-800 text-white p-4 rounded-md overflow-x-auto"
+  ><code class="font-mono text-sm">{{.Content}}</code></pre>
+  <!-- Footer metadata styling -->
+  <div
+    class="metadata flex justify-between items-center text-sm text-gray-500 pt-2 border-t border-gray-200"
+  >
+    <time>Created: {{humanDate .Created}}</time>
+    <time>Expires: {{humanDate .Expires}}</time>
+  </div>
+</div>
+{{end}} {{end}}

@@ -1,6 +1,11 @@
 {{ define "nav" }}
-<nav>
-    <a href="/">Home</a>
-    <a href='/snippet/form'>Create snippet</a>
+<!-- Navigation bar styling -->
+<nav class="bg-white py-3 px-4 shadow-md flex justify-start space-x-4 mb-4">
+  <a href="/" class="text-blue-600 hover:text-blue-800 hover:underline">Home</a>
+  <a
+    href="/snippet/form"
+    class="text-blue-600 hover:text-blue-800 hover:underline"
+    >Create snippet</a
+  >
 </nav>
 {{ end }}
